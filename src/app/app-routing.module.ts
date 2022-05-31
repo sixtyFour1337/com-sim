@@ -5,9 +5,9 @@ import { StartLogoScreenComponent } from './container/start-logo-screen/start-lo
 import { DesktopComponent } from './container/desktop/desktop.component';
 
 const routes: Routes = [
-  { path: '/bootscreen', component: BootScreenComponent },
-  { path: '/startlogoscreen', component: StartLogoScreenComponent },
-  { path: '/desktop', component: DesktopComponent }
+  { path: 'bootscreen', component: BootScreenComponent },
+  { path: 'startlogoscreen', component: StartLogoScreenComponent },
+  { path: 'desktop', component: DesktopComponent }
 ];
 
 @NgModule({

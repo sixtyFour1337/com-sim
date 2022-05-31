@@ -1,9 +1,10 @@
 {
+  "author": "Timon Bolte, timonbolte@gmx.de",
   "name": "com-sim",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --open",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
