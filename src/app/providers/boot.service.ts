@@ -13,5 +13,17 @@ export class BootService {
 
   getBootScreenFinished(): boolean {
     return sessionStorage.getItem('bootScreenFinished') ? sessionStorage.getItem('bootScreenFinished') === 'true' : false;
- }
+  }
+
+  setStartScreenFinished(value: boolean): void {
+    sessionStorage.setItem('startScreenFinished', value.toString());
+  }
+
+  getStartScreenFinished(): boolean {
+    return sessionStorage.getItem('startScreenFinished') ? sessionStorage.getItem('startScreenFinished') === 'true' : false;
+  }
+
+  clearSessionStorage(): void {
+    sessionStorage.clear();
+  }
 }

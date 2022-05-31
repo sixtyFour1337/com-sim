@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BootService } from 'src/app/providers/boot.service';
 
 @Component({
   selector: 'app-desktop',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DesktopComponent implements OnInit {
 
-  constructor() { }
+  constructor(private bootService: BootService) { }
 
   ngOnInit(): void {
+  }
+
+  clearSession(): void {
+    this.bootService.clearSessionStorage();
   }
 
 }

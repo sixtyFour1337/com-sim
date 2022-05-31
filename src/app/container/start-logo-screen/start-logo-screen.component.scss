@@ -1,0 +1,32 @@
+.container {
+    width: 100%;
+    height: 100%;
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .logo-box {
+        height: 15rem;
+        width: 25rem;
+        border: 5px solid blue;
+        border-radius: 15px;
+        color: #fff;
+        font-size: 2rem;
+        font-family: 'Courier New', Courier, monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .progress-bar {
+        width: 30rem;
+        height: 3rem;
+        background-color:  grey;
+        margin-top: 2rem;
+    }
+    .progress {
+        background-color: greenyellow;
+        height: 100%;
+    }
+}
