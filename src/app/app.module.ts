@@ -7,6 +7,8 @@ import { BootScreenComponent } from './container/boot-screen/boot-screen.compone
 import { StartLogoScreenComponent } from './container/start-logo-screen/start-logo-screen.component';
 import { DesktopComponent } from './container/desktop/desktop.component';
 
+import { BootService } from './providers/boot.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +20,7 @@ import { DesktopComponent } from './container/desktop/desktop.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [BootService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

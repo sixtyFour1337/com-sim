@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BootService } from 'src/app/providers/boot.service';
 
 @Component({
   selector: 'app-boot-screen',
@@ -9,28 +11,42 @@ export class BootScreenComponent implements OnInit {
 
   firstRunBool = true;
   typingEnd = false;
-  displayText = '';
   displayTexts = [];
 
   boottextParts = [
-    {text: '>booting system', delay: 3000},
-    {text: '>', delay: 300},
-    {text: '>', delay: 300},
-    {text: '>', delay: 300},
-    {text: '>starting services', delay: 2000},
-    {text: '>', delay: 300},
-    {text: '>', delay: 300},
-    {text: '>', delay: 300},
-    {text: '>loading user settings', delay: 1000},
-    {text: '>', delay: 300},
-    {text: '>', delay: 300},
-    {text: '>', delay: 300},
+    {text: '>booting system...', delay: 3000},
+    {text: '>', delay: 200},
+    {text: '>', delay: 200},
+    {text: '>', delay: 200},
+    {text: '>starting services...', delay: 2000},
+    {text: '>', delay: 200},
+    {text: '>', delay: 200},
+    {text: '>', delay: 200},
+    {text: '>loading user settings...', delay: 1000},
+    {text: '>', delay: 200},
+    {text: '>', delay: 200},
+    {text: '>', delay: 200},
+    {text: '>ERROR! can\'t find user settings', delay: 1000},
+    {text: '>loading guest settings...', delay: 1000},
+    {text: '>', delay: 200},
+    {text: '>', delay: 200},
+    {text: '>', delay: 200},
+    {text: '>loading user interface...', delay: 2000},
+    {text: '>', delay: 200},
+    {text: '>', delay: 200},
+    {text: '>', delay: 200},
+    {text: '>loading finished!', delay: 1000},
+    {text: '>Welcome Stranger', delay: 1000},
   ];
 
-  constructor() { }
+  constructor(private router: Router, private bootService: BootService) { }
 
   ngOnInit(): void {
-    this.firstRun();
+    if (!this.bootService.getBootScreenFinished()) {
+      this.firstRun();
+    } else {
+      this.router.navigate(['/startlogoscreen']);
+    }
   }
 
   typewriter(text: string, i: number, fnCallback: any, delay: number, index: number): void {
@@ -60,7 +76,8 @@ export class BootScreenComponent implements OnInit {
 
   startTextAnimation(i: number): void {
     if (typeof this.boottextParts[i] === 'undefined') {
-      console.log('the end');
+      this.bootService.setBootScreenFinished(true);
+      this.router.navigate(['/startlogoscreen']);
     } else if (i < this.boottextParts.length) {
       this.displayTexts.push({text: '', finished: false});
       if (i > 0) {
