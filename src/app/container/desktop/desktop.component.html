@@ -1,2 +1,6 @@
-<p>desktop works!</p>
-<button (click)="clearSession()">clear session</button>
+<div class="container">
+
+
+</div>
+<app-taskbar (toggledStart)="toggleStart($event)"></app-taskbar>
+<app-start-panel *ngIf="toggledStart"></app-start-panel>

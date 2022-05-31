@@ -8,13 +8,17 @@ import { StartLogoScreenComponent } from './container/start-logo-screen/start-lo
 import { DesktopComponent } from './container/desktop/desktop.component';
 
 import { BootService } from './providers/boot.service';
+import { TaskbarComponent } from './components/taskbar/taskbar.component';
+import { StartPanelComponent } from './components/start-panel/start-panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BootScreenComponent,
     StartLogoScreenComponent,
-    DesktopComponent
+    DesktopComponent,
+    TaskbarComponent,
+    StartPanelComponent
   ],
   imports: [
     BrowserModule,

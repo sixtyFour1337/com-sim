@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BootService } from 'src/app/providers/boot.service';
 
 @Component({
   selector: 'app-desktop',
@@ -8,13 +7,15 @@ import { BootService } from 'src/app/providers/boot.service';
 })
 export class DesktopComponent implements OnInit {
 
-  constructor(private bootService: BootService) { }
+  toggledStart = false;
+
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  clearSession(): void {
-    this.bootService.clearSessionStorage();
+  toggleStart(value: boolean): void {
+    this.toggledStart = value;
   }
 
 }

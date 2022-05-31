@@ -15,7 +15,6 @@ export class StartLogoScreenComponent implements OnInit {
   ngOnInit(): void {
     if (!this.bootService.getStartScreenFinished()) {
       const interval = setInterval(() => {
-        console.log('width', this.width);
         if (this.width === 100) {
           clearInterval(interval);
           this.bootService.setStartScreenFinished(true);
