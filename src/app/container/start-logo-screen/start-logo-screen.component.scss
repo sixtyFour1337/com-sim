@@ -1,22 +1,27 @@
 .container {
     width: 100%;
     height: 100%;
-    background-color: lightblue;
+    background-color: #60605F;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 15px solid #C5B828;
+    box-sizing: border-box;
 
     .logo-box {
         height: 15rem;
         width: 25rem;
-        border: 5px solid blue;
-        border-radius: 15px;
-        color: #fff;
-        font-size: 2rem;
+        // border: 25px solid #C5B828;
+        background-color: #C5B828;
+        border-radius: 25px;
+        color: #60605F;
+        font-size: 3.5rem;
         font-family: 'Courier New', Courier, monospace;
         display: flex;
         justify-content: center;
         align-items: center;
+        box-sizing: border-box;
+        font-weight: bold;
     }
 
     .progress-bar {
@@ -26,7 +31,44 @@
         margin-top: 2rem;
     }
     .progress {
-        background-color: greenyellow;
+        background-color: #C5B828;
         height: 100%;
     }
+}
+
+.box {
+    height: 3rem;
+    width: 3rem;
+    background-color: #C5B828;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+.circle {
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    background-color: #60605F;
+}
+
+.top-left {
+    top: 0;
+    left: 0;
+}
+
+.top-right {
+    top: 0;
+    right: 0;
+}
+
+.bottom-left {
+    bottom: 0;
+    left: 0;
+}
+
+.bottom-right {
+    bottom: 0;
+    right: 0;
 }

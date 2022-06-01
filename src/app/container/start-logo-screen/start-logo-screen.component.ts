@@ -18,6 +18,7 @@ export class StartLogoScreenComponent implements OnInit {
         if (this.width === 100) {
           clearInterval(interval);
           this.bootService.setStartScreenFinished(true);
+          this.width = 0;
           this.router.navigate(['/desktop']);
         } else {
           this.width += 10;
