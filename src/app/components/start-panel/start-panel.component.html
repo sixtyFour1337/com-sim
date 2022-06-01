@@ -1,7 +1,12 @@
 <div class="container">
     <div class="function-panel">
-        <div class="restart-button" (click)="clearSession()">
-            <div class="icon"><app-icon name="standby"></app-icon></div>
+        <!-- Restart Button -->
+        <div class="function-panel-button">
+            <div class="icon" (click)="restartCom()"><app-icon name="standby"></app-icon></div>
+        </div>
+        <!-- Settings Button -->
+        <div class="function-panel-button" (click)="openWindow()">
+            <div class="icon"><app-icon name="settings"></app-icon></div>
         </div>
     </div>
 </div>

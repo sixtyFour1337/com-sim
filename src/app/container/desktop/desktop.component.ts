@@ -9,6 +9,8 @@ export class DesktopComponent implements OnInit {
 
   toggledStart = false;
 
+  openWindow = false;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -20,6 +22,10 @@ export class DesktopComponent implements OnInit {
 
   onDesktop(): void {
 
+  }
+
+  onOpenWindow(value: any): void {
+    this.openWindow = true;
   }
 
 }

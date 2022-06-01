@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BootService } from 'src/app/providers/boot.service';
 
 @Component({
@@ -8,14 +8,21 @@ import { BootService } from 'src/app/providers/boot.service';
 })
 export class StartPanelComponent implements OnInit {
 
+  @Output() openedWindow = new EventEmitter<any>();
+
   constructor(private bootService: BootService) { }
 
   ngOnInit(): void {
   }
 
-  clearSession(): void {
+  restartCom(): void {
+    // clears session and restarts page and following animations
     this.bootService.clearSessionStorage();
     window.location.reload();
+  }
+
+  openWindow(): void {
+    this.openedWindow.emit(true);
   }
 
 }

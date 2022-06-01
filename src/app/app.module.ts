@@ -14,6 +14,7 @@ import { DesktopComponent } from './container/desktop/desktop.component';
 import { TaskbarComponent } from './components/taskbar/taskbar.component';
 import { StartPanelComponent } from './components/start-panel/start-panel.component';
 import { IconComponent } from './components/icon/icon.component';
+import { WindowComponent } from './components/window/window.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { IconComponent } from './components/icon/icon.component';
     TaskbarComponent,
     StartPanelComponent,
     IconComponent,
-    SafePipe
+    SafePipe,
+    WindowComponent
   ],
   imports: [
     BrowserModule,

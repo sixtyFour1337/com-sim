@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="header">
+        <div class="header-title">Test Title</div>
+
+        <div class="header-buttons">
+            <div class="header-btn minimize" (click)="onMinimize()">
+                <div class="icon"><app-icon name="minimize"></app-icon></div>
+            </div>
+            <div class="header-btn maximize" (click)="onMaximize()">
+                <div class="icon"><app-icon name="maximize"></app-icon></div>
+            </div>
+            <div class="header-btn close" (click)="onClose()">
+                <div class="icon"><app-icon name="close"></app-icon></div>
+            </div>
+        </div>
+    </div>
+    <div class="body">
+
+        <ng-content></ng-content>
+
+    </div>
+</div>

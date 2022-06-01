@@ -3,4 +3,6 @@
     <app-taskbar (toggledStart)="toggleStart($event)"></app-taskbar>
 </div>
 
-<app-start-panel *ngIf="toggledStart"></app-start-panel>
+<app-start-panel *ngIf="toggledStart" (openedWindow)="onOpenWindow($event)"></app-start-panel>
+
+<app-window *ngIf="openWindow"></app-window>
