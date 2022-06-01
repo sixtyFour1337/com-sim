@@ -1,8 +1,35 @@
 .container {
     height: 40rem;
     width: 30rem;
-    background-color: red;
+    background-color: transparent;
+    backdrop-filter: blur(3px);
+    border-top: 2px solid #51514C;
+    border-right: 2px solid #51514C;
+    box-sizing: border-box;
     position: absolute;
     left: 0;
-    bottom: 3rem;
+    bottom: 2.7rem;
+
+    .function-panel {
+        height: 100%;
+        width: 4rem;
+        background-color: #51514C;
+        display: flex;
+
+        .restart-button {
+            align-self: flex-end;
+            width: 100%;
+            height: 4rem;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+
+            .icon {
+                height: 2.2rem;
+                width: 2.2rem;
+            }
+        }
+    }
 }

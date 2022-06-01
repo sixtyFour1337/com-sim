@@ -18,4 +18,8 @@ export class DesktopComponent implements OnInit {
     this.toggledStart = value;
   }
 
+  onDesktop(): void {
+
+  }
+
 }

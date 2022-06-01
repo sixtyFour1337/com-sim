@@ -15,6 +15,7 @@ export class StartPanelComponent implements OnInit {
 
   clearSession(): void {
     this.bootService.clearSessionStorage();
+    window.location.reload();
   }
 
 }

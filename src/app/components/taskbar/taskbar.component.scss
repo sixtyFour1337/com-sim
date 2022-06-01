@@ -1,16 +1,17 @@
 .container {
-    display: absolute;
+    position: absolute;
     left: 0;
     bottom: 0;
-    height: 3rem;
+    height: 2.7rem;
     width: 100%;
-    background-color: darkcyan;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
     display: flex;
 
     .start-button {
         height: 100%;
-        width: 7rem;
-        background-color: blue;
+        width: 6rem;
+        background-color: #1F1F1E;
         color: #fff;
         display: flex;
         justify-content: center;

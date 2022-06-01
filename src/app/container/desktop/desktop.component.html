@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container" (click)="onDesktop()">
 
-
+    <app-taskbar (toggledStart)="toggleStart($event)"></app-taskbar>
 </div>
-<app-taskbar (toggledStart)="toggleStart($event)"></app-taskbar>
+
 <app-start-panel *ngIf="toggledStart"></app-start-panel>
