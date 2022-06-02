@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StartPanelService } from 'src/app/providers/start-panel.service';
 
 @Component({
   selector: 'app-desktop',
@@ -11,9 +12,19 @@ export class DesktopComponent implements OnInit {
 
   openWindow = false;
 
-  constructor() { }
+  windows = [];
+
+  boxes = [1];
+
+  constructor(public startPanelService: StartPanelService) {
+    this.startPanelService.sendStartPanelStatus$.subscribe(() => {
+      this.toggledStart = this.startPanelService.getStartPanelStatus();
+    });
+  }
 
   ngOnInit(): void {
+    // this.toggledStart = this.startPanelService.getStartPanelStatus();
+    // console.log('hallo', this.toggledStart);
   }
 
   toggleStart(value: boolean): void {
@@ -21,11 +32,12 @@ export class DesktopComponent implements OnInit {
   }
 
   onDesktop(): void {
-
+    this.startPanelService.closeStartPanel();
   }
 
   onOpenWindow(value: any): void {
-    this.openWindow = true;
+    this.startPanelService.closeStartPanel();
+    this.windows.push(1);
   }
 
 }

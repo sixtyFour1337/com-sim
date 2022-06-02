@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { BootService } from './providers/boot.service';
 
@@ -14,7 +15,7 @@ import { DesktopComponent } from './container/desktop/desktop.component';
 import { TaskbarComponent } from './components/taskbar/taskbar.component';
 import { StartPanelComponent } from './components/start-panel/start-panel.component';
 import { IconComponent } from './components/icon/icon.component';
-import { WindowComponent } from './components/window/window.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,11 +27,12 @@ import { WindowComponent } from './components/window/window.component';
     StartPanelComponent,
     IconComponent,
     SafePipe,
-    WindowComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    DragDropModule
   ],
   providers: [
     BootService

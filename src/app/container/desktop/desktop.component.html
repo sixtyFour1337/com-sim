@@ -1,8 +1,39 @@
-<div class="container" (click)="onDesktop()">
+<div class="container" >
+    <div class="desktop-workspace" (click)="onDesktop()">
 
-    <app-taskbar (toggledStart)="toggleStart($event)"></app-taskbar>
+
+    </div>
+
+    <!-- Windows -->
+    <div *ngIf="windows.length > 0">
+        <div *ngFor="let window of windows; let i = index;" cdkDragBoundary=".container" cdkDrag class="window">
+            <div class="header" cdkDragHandle>
+                <div class="header-title">Test Title {{ i }}</div>
+
+                <div class="header-buttons">
+                    <div class="header-btn minimize" (click)="onMinimize()">
+                        <div class="icon"><app-icon name="minimize"></app-icon></div>
+                    </div>
+                    <div class="header-btn maximize" (click)="onMaximize()">
+                        <div class="icon"><app-icon name="maximize"></app-icon></div>
+                    </div>
+                    <div class="header-btn close" (click)="onClose()">
+                        <div class="icon"><app-icon name="close"></app-icon></div>
+                    </div>
+                </div>
+            </div>
+            <div class="body">
+
+                <!-- <ng-content></ng-content> -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Taskbar -->
+    <app-taskbar></app-taskbar>
 </div>
 
+<!-- Start Panel -->
 <app-start-panel *ngIf="toggledStart" (openedWindow)="onOpenWindow($event)"></app-start-panel>
 
-<app-window *ngIf="openWindow"></app-window>

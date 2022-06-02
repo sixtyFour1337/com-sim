@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { StartPanelService } from 'src/app/providers/start-panel.service';
 
 @Component({
   selector: 'app-taskbar',
@@ -8,18 +9,18 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class TaskbarComponent implements OnInit {
 
   @Input() tasks: any = [];
-  @Output() toggledStart = new EventEmitter<boolean>();
 
-  startToggle = false;
-
-  constructor() { }
+  constructor(private startPanelService: StartPanelService) { }
 
   ngOnInit(): void {
   }
 
   toggleStart(): void {
-    this.startToggle = !this.startToggle;
-    this.toggledStart.emit(this.startToggle);
+    if (this.startPanelService.getStartPanelStatus()) {
+      this.startPanelService.closeStartPanel();
+    } else {
+      this.startPanelService.openStartPanel();
+    }
   }
 
 }
