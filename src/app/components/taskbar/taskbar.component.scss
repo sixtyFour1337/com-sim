@@ -30,14 +30,17 @@
         align-items: center;
         cursor: pointer;
         user-select: none;
-        margin-left: 10px;
+        margin-left: 5px;
+        box-sizing: border-box;
+        border-bottom: 2px solid transparent;
     }
     .task:hover {
-        background-color: #1F1F1E;
+        background-color: rgba(31, 31, 30, 0.4);
     }
 
     .active {
-        background-color: red;
+        box-sizing: border-box;
+        border-bottom: 2px solid #C5B828;
     }
 }
 
