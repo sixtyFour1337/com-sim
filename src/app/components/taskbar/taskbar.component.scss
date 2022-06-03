@@ -19,4 +19,26 @@
         cursor: pointer;
         user-select: none;
     }
+
+    .task {
+        height: 100%;
+        width: 6rem;
+        background-color: transparent;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        margin-left: 10px;
+    }
+    .task:hover {
+        background-color: #1F1F1E;
+    }
+
+    .active {
+        background-color: red;
+    }
 }
+
+// background-color: #1F1F1E;

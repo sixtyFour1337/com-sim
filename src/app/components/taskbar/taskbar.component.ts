@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { StartPanelService } from 'src/app/providers/start-panel.service';
 
 @Component({
@@ -6,13 +6,20 @@ import { StartPanelService } from 'src/app/providers/start-panel.service';
   templateUrl: './taskbar.component.html',
   styleUrls: ['./taskbar.component.scss']
 })
-export class TaskbarComponent implements OnInit {
+export class TaskbarComponent implements OnInit, OnChanges {
 
   @Input() tasks: any = [];
+  @Output() sendTaskClick = new EventEmitter();
 
   constructor(private startPanelService: StartPanelService) { }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.tasks && changes.tasks.previousValue !== changes.tasks.currentValue) {
+      this.tasks = changes.tasks.currentValue;
+    }
   }
 
   toggleStart(): void {
@@ -21,6 +28,10 @@ export class TaskbarComponent implements OnInit {
     } else {
       this.startPanelService.openStartPanel();
     }
+  }
+
+  onTask(id: number): void {
+    this.sendTaskClick.emit(id);
   }
 
 }

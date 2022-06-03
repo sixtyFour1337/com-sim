@@ -6,18 +6,18 @@
 
     <!-- Windows -->
     <div *ngIf="windows.length > 0">
-        <div *ngFor="let window of windows; let i = index;" cdkDragBoundary=".container" cdkDrag class="window">
+        <div *ngFor="let window of windows; let i = index;" cdkDragBoundary=".container" cdkDrag class="window" [ngStyle]="{'display': window.minimized ? 'none' : 'flex'}">
             <div class="header" cdkDragHandle>
-                <div class="header-title">Test Title {{ i }}</div>
+                <div class="header-title">{{ window.title }}</div>
 
                 <div class="header-buttons">
-                    <div class="header-btn minimize" (click)="onMinimize()">
+                    <div class="header-btn minimize" (click)="onMinimize(window.id)">
                         <div class="icon"><app-icon name="minimize"></app-icon></div>
                     </div>
-                    <div class="header-btn maximize" (click)="onMaximize()">
+                    <div class="header-btn maximize" (click)="onMaximize(window.id)">
                         <div class="icon"><app-icon name="maximize"></app-icon></div>
                     </div>
-                    <div class="header-btn close" (click)="onClose()">
+                    <div class="header-btn close" (click)="onClose(window.id)">
                         <div class="icon"><app-icon name="close"></app-icon></div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
     </div>
 
     <!-- Taskbar -->
-    <app-taskbar></app-taskbar>
+    <app-taskbar [tasks]="tasks" (sendTaskClick)="onMinimize($event)"></app-taskbar>
 </div>
 
 <!-- Start Panel -->

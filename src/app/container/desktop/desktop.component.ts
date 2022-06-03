@@ -14,7 +14,7 @@ export class DesktopComponent implements OnInit {
 
   windows = [];
 
-  boxes = [1];
+  tasks = [];
 
   constructor(public startPanelService: StartPanelService) {
     this.startPanelService.sendStartPanelStatus$.subscribe(() => {
@@ -23,8 +23,6 @@ export class DesktopComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.toggledStart = this.startPanelService.getStartPanelStatus();
-    // console.log('hallo', this.toggledStart);
   }
 
   toggleStart(value: boolean): void {
@@ -37,7 +35,41 @@ export class DesktopComponent implements OnInit {
 
   onOpenWindow(value: any): void {
     this.startPanelService.closeStartPanel();
-    this.windows.push(1);
+
+    const validId = this.windows.length > 0 ? this.windows[this.windows.length - 1].id + 1 : 1;
+
+    this.windows.push({id: validId, title: 'test title ' + validId, minimized: false});
+    this.tasks.push({id: validId, title: 'test title ' + validId, active: true});
+  }
+
+  onMinimize(id: number): void {
+    this.windows.forEach(el => {
+      if (el.id === id) {
+        if (el.minimized) {
+          el.minimized = false;
+        } else {
+          el.minimized = true;
+        }
+      }
+    });
+    this.tasks.forEach(el => {
+      if (el.id === id) {
+        if (el.active) {
+          el.active = false;
+        } else {
+          el.active = true;
+        }
+      }
+    });
+  }
+
+  onMaximize(id: number): void {
+
+  }
+
+  onClose(id: number): void {
+    this.windows = this.windows.filter(el => el.id !== id);
+    this.tasks = this.tasks.filter(el => el.id !== id);
   }
 
 }
