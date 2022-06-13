@@ -11,9 +11,15 @@ export class TaskbarComponent implements OnInit, OnChanges {
   @Input() tasks: any = [];
   @Output() sendTaskClick = new EventEmitter();
 
+  public time = '';
+  public timeTimeout: any;
+  public date = '';
+
   constructor(private startPanelService: StartPanelService) { }
 
   ngOnInit(): void {
+    this.currentTime();
+    this.getDate();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -32,6 +38,35 @@ export class TaskbarComponent implements OnInit, OnChanges {
 
   onTask(id: number): void {
     this.sendTaskClick.emit(id);
+  }
+
+  currentTime(): void  {
+    const date = new Date();
+    let hour = date.getHours();
+    let min = date.getMinutes();
+    hour = this.updateTime(hour);
+    min = this.updateTime(min);
+
+    this.time = hour + ':' + min;
+    this.timeTimeout = setTimeout(() => { this.currentTime(); }, 1000);
+  }
+
+  updateTime(k: number): any {
+    if (k < 10) {
+      return '0' + k;
+    }
+    else {
+      return k;
+    }
+  }
+
+  getDate(): void {
+    const date = new Date();
+    const year = date.getFullYear();
+    let month: any = date.getMonth() + 1;
+    month = month.toString().length === 1 ? '0' + month : month;
+    const day = date.getDate();
+    this.date = day + '.' + month + '.' + year;
   }
 
 }
