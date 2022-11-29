@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { StartPanelService } from 'src/app/providers/start-panel.service';
 
 @Component({
@@ -8,13 +8,18 @@ import { StartPanelService } from 'src/app/providers/start-panel.service';
 })
 export class DesktopComponent implements OnInit {
 
-  toggledStart = false;
+  @ViewChild('textEditorContent', {static: false}) textEditorContent: ElementRef<HTMLElement>;
 
+  toggledStart = false;
   openWindow = false;
+  textEditor = false;
+  isSingleClick = false;
 
   windows = [];
-
   tasks = [];
+  desktopIcons = [
+    { id: 1, icon: 'text-editor', title: 'Text Editor', active: false }
+  ];
 
   constructor(public startPanelService: StartPanelService) {
     this.startPanelService.sendStartPanelStatus$.subscribe(() => {
@@ -31,6 +36,7 @@ export class DesktopComponent implements OnInit {
 
   onDesktop(): void {
     this.startPanelService.closeStartPanel();
+    // this.desktopIcons.forEach(el => el.active = false);
   }
 
   onOpenWindow(value: any): void {
@@ -45,20 +51,12 @@ export class DesktopComponent implements OnInit {
   onMinimize(id: number): void {
     this.windows.forEach(el => {
       if (el.id === id) {
-        if (el.minimized) {
-          el.minimized = false;
-        } else {
-          el.minimized = true;
-        }
+        el.minimized = !el.minimized;
       }
     });
     this.tasks.forEach(el => {
       if (el.id === id) {
-        if (el.active) {
-          el.active = false;
-        } else {
-          el.active = true;
-        }
+        el.active = !el.active;
       }
     });
   }
@@ -70,6 +68,38 @@ export class DesktopComponent implements OnInit {
   onClose(id: number): void {
     this.windows = this.windows.filter(el => el.id !== id);
     this.tasks = this.tasks.filter(el => el.id !== id);
+    this.textEditor = false;
+  }
+
+  clickDesktopIcon(event: any, icon: any): void {
+    if (event.detail === 1) {
+      this.desktopIcons.forEach(el => {
+        if (el.id === icon.id) {
+          el.active = !el.active;
+        }
+      });
+    } else if (event.detail === 2) {
+      this.desktopIcons.forEach(el => el.active = false);
+      switch (icon.id) {
+        case 1:
+          this.openTextEditorWindow();
+          break;
+      }
+    }
+  }
+
+  openTextEditorWindow(): void {
+    if (!this.textEditor) {
+      const validId = this.windows.length > 0 ? this.windows[this.windows.length - 1].id + 1 : 1;
+      this.windows.push({id: validId, title: 'Text Editor', minimized: false});
+      this.tasks.push({id: validId, title: 'Text Editor', active: true});
+      this.textEditor = true;
+    }
+  }
+
+  textEditorKeyDown(event): void {
+    console.log('event', event.key);
+    this.textEditorContent.nativeElement.innerHTML += event.key;
   }
 
 }

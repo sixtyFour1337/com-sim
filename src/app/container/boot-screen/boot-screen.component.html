@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" (keydown)="checkKeypress($event)" tabindex="0">
     <div class="text-box">
         <div *ngIf="firstRunBool" style="display: flex">><div [ngClass]="{'underscore': typingEnd}">_</div></div>
         <div class="boot-text">

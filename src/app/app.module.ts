@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { BootService } from './providers/boot.service';
+import { KeylistenerService } from './providers/keylistener.service';
 
 import { SafePipe } from './pipes/safe.pipe';
 
@@ -35,7 +36,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DragDropModule
   ],
   providers: [
-    BootService
+    BootService,
+    KeylistenerService
   ],
   bootstrap: [AppComponent]
 })

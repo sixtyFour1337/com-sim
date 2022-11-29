@@ -45,7 +45,7 @@ export class BootScreenComponent implements OnInit {
     if (!this.bootService.getBootScreenFinished()) {
       this.firstRun();
     } else {
-      this.router.navigate(['/startlogoscreen']);
+      this.router.navigate(['/desktop']);
     }
   }
 
@@ -86,6 +86,14 @@ export class BootScreenComponent implements OnInit {
       this.typewriter(this.boottextParts[i].text, 0, () => {
         this.startTextAnimation(++i);
       }, this.boottextParts[i].delay, i);
+    }
+  }
+
+  checkKeypress(event): void {
+    if (event.key === 'Escape') {
+      this.bootService.setBootScreenFinished(true);
+      this.bootService.setStartScreenFinished(true);
+      this.router.navigate(['/desktop']);
     }
   }
 

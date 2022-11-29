@@ -40,6 +40,11 @@ export class IconComponent implements OnInit, OnChanges {
       name: 'close',
       // tslint:disable-next-line: max-line-length
       svg: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>'
+    },
+    {
+      name: 'text-editor',
+      // tslint:disable-next-line: max-line-length
+      svg: '<svg viewBox="0 0 48 48"><path fill="currentColor" d="M11 44q-1.2 0-2.1-.9Q8 42.2 8 41V7q0-1.2.9-2.1Q9.8 4 11 4h18.05L40 14.95V41q0 1.2-.9 2.1-.9.9-2.1.9Zm16.55-27.7V7H11v34h26V16.3ZM11 7v9.3V7v34V7Z"/></svg>'
     }
   ];
 
