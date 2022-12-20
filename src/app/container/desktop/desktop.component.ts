@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StartPanelService } from 'src/app/providers/start-panel.service';
 
 @Component({
@@ -7,8 +7,6 @@ import { StartPanelService } from 'src/app/providers/start-panel.service';
   styleUrls: ['./desktop.component.scss']
 })
 export class DesktopComponent implements OnInit {
-
-  @ViewChild('textEditorContent', {static: false}) textEditorContent: ElementRef<HTMLElement>;
 
   toggledStart = false;
   openWindow = false;
@@ -20,6 +18,7 @@ export class DesktopComponent implements OnInit {
   desktopIcons = [
     { id: 1, icon: 'text-editor', title: 'Text Editor', active: false }
   ];
+  textEditorText = [{text: '', finished: false}];
 
   constructor(public startPanelService: StartPanelService) {
     this.startPanelService.sendStartPanelStatus$.subscribe(() => {
@@ -42,10 +41,8 @@ export class DesktopComponent implements OnInit {
   onOpenWindow(value: any): void {
     this.startPanelService.closeStartPanel();
 
-    const validId = this.windows.length > 0 ? this.windows[this.windows.length - 1].id + 1 : 1;
-
-    this.windows.push({id: validId, title: 'test title ' + validId, minimized: false});
-    this.tasks.push({id: validId, title: 'test title ' + validId, active: true});
+    this.windows.push({id: this.getValidWindowId(), title: 'test title ' + this.getValidWindowId(), minimized: false});
+    this.tasks.push({id: this.getValidWindowId(), title: 'test title ' + this.getValidWindowId(), active: true});
   }
 
   onMinimize(id: number): void {
@@ -90,16 +87,58 @@ export class DesktopComponent implements OnInit {
 
   openTextEditorWindow(): void {
     if (!this.textEditor) {
-      const validId = this.windows.length > 0 ? this.windows[this.windows.length - 1].id + 1 : 1;
-      this.windows.push({id: validId, title: 'Text Editor', minimized: false});
-      this.tasks.push({id: validId, title: 'Text Editor', active: true});
+      this.windows.push({id: this.getValidWindowId(), title: 'Text Editor', minimized: false});
+      this.tasks.push({id: this.getValidWindowId(), title: 'Text Editor', active: true});
       this.textEditor = true;
     }
   }
 
-  textEditorKeyDown(event): void {
-    console.log('event', event.key);
-    this.textEditorContent.nativeElement.innerHTML += event.key;
+  getValidWindowId(): number {
+    return this.windows.length > 0 ? this.windows[this.windows.length - 1].id + 1 : 1;
   }
 
+  textEditorKeyDown(event): void {
+
+    console.log('event', event.key);
+
+    if (event.key.length === 1) {
+      this.textEditorKey(event.key);
+    } else {
+      switch (event.key) {
+        case 'Enter':
+          this.textEditorEnter();
+          break;
+        case 'Backspace':
+          this.textEditorBackspace();
+          break;
+      }
+    }
+  }
+
+  textEditorKey(key: string): void {
+    this.textEditorText[this.textEditorText.length - 1].text += key;
+  }
+
+  textEditorEnter(): void {
+    this.removeCaretsFromLines();
+    this.textEditorText.push({text: '', finished: false});
+  }
+
+  textEditorBackspace(): void {
+    if (this.textEditorText[this.textEditorText.length - 1].text.length >= 1) {
+      // tslint:disable-next-line: max-line-length
+      this.textEditorText[this.textEditorText.length - 1].text = this.textEditorText[this.textEditorText.length - 1].text.slice(0, -1);
+    } else if (this.textEditorText[this.textEditorText.length - 1].text.length === 0 && this.textEditorText.length >= 2) {
+      this.textEditorText.splice(this.textEditorText.indexOf(this.textEditorText[this.textEditorText.length - 1]), 1);
+      this.addCaretToLastLine();
+    }
+  }
+
+  removeCaretsFromLines(): void {
+    this.textEditorText.forEach(el => el.finished = true);
+  }
+
+  addCaretToLastLine(): void {
+    this.textEditorText[this.textEditorText.length - 1].finished = false;
+  }
 }

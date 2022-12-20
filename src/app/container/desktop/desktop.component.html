@@ -27,7 +27,12 @@
             <div class="body">
 
                 <div *ngIf="textEditor" class="text-editor-container" (keydown)="textEditorKeyDown($event)" tabindex="1">
-                    <div class="text-editor-content" #textEditorContent></div><div [ngClass]="'type-cursor'">|</div>
+                    <!-- <div class="text-editor-content" #textEditorContent></div><div [ngClass]="'type-cursor'">|</div> -->
+                    <div class="text-editor-content">
+                        <div *ngFor="let text of textEditorText" style="display: flex;">
+                            {{ text.text }}<div *ngIf="!text.finished" [ngClass]="'type-cursor'">|</div>
+                        </div>
+                    </div>
                 </div>
 
             </div>

@@ -121,6 +121,7 @@
                 width: calc(100% - 2rem);
                 padding: 1rem;
                 display: flex;
+                user-select: none;
 
                 .text-editor-content {
                     color: #000;
