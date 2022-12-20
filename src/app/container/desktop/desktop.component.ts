@@ -40,9 +40,18 @@ export class DesktopComponent implements OnInit {
 
   onOpenWindow(value: any): void {
     this.startPanelService.closeStartPanel();
+    const windowId = this.getValidWindowId();
 
-    this.windows.push({id: this.getValidWindowId(), title: 'test title ' + this.getValidWindowId(), minimized: false});
-    this.tasks.push({id: this.getValidWindowId(), title: 'test title ' + this.getValidWindowId(), active: true});
+    this.addWindow(windowId, 'Window ' + windowId);
+    this.addTask(windowId, 'Window ' + windowId);
+  }
+
+  addWindow(windowId: number, windowTitle: string): void {
+    this.windows.push({id: windowId, title: windowTitle, minimized: false, maximized: false});
+  }
+
+  addTask(windowId: number, windowTitle: string): void {
+    this.tasks.push({id: windowId, title: windowTitle, active: true});
   }
 
   onMinimize(id: number): void {
@@ -59,7 +68,11 @@ export class DesktopComponent implements OnInit {
   }
 
   onMaximize(id: number): void {
-
+    this.windows.forEach(el => {
+      if (el.id === id ) {
+        el.maximized = !el.maximized;
+      }
+    });
   }
 
   onClose(id: number): void {
@@ -87,8 +100,10 @@ export class DesktopComponent implements OnInit {
 
   openTextEditorWindow(): void {
     if (!this.textEditor) {
-      this.windows.push({id: this.getValidWindowId(), title: 'Text Editor', minimized: false});
-      this.tasks.push({id: this.getValidWindowId(), title: 'Text Editor', active: true});
+      const windowId = this.getValidWindowId();
+
+      this.addWindow(windowId, 'Text Editor');
+      this.addTask(windowId, 'Text Editor');
       this.textEditor = true;
     }
   }

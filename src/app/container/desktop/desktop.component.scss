@@ -142,6 +142,10 @@
             }
         }
     }
+    .window-maximize {
+        height: calc(100% - 2rem);
+        width: 100%;
+    }
 }
 
 .task-bar {

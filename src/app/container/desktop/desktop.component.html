@@ -8,7 +8,14 @@
 
     <!-- Windows -->
     <div *ngIf="windows.length > 0">
-        <div *ngFor="let window of windows; let i = index;" cdkDragBoundary=".container" cdkDrag class="window" [ngStyle]="{'display': window.minimized ? 'none' : 'flex'}">
+        <div 
+            *ngFor="let window of windows; let i = index;"
+            cdkDragBoundary=".container"
+            cdkDrag 
+            class="window"
+            [ngStyle]="{'display': window.minimized ? 'none' : 'flex'}"
+            [ngClass]="{'window-maximize': window.maximized}"
+        >
             <div class="header" cdkDragHandle>
                 <div class="header-title">{{ window.title }}</div>
 
